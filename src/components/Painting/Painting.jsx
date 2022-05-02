@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import s from "./Painting.module.css";
 
 export default function Painting({
   imageUrl,
@@ -9,15 +10,15 @@ export default function Painting({
   quantity,
 }) {
   return (
-    <div>
+    <div className={s.container}>
       <img src={imageUrl} alt={title} width="480" />
       <h2>{title}</h2>
       <p>
-        Автор: <a href={profileUrl}>{author}</a>
+        Author: <a href={profileUrl}>{author}</a>
       </p>
-      <p>Цена: {price} кредитов</p>
-      <p>Доступность: {quantity > 10 ? "At storage" : "Заканчивается"}</p>
-      <button type="button">Добавить в корзину</button>
+      <p>Price: {price}$</p>
+      <p>Availability: {quantity > 10 ? "Enough" : "Running out"}</p>
+      <button type="button">Add to cart</button>
     </div>
   );
 }
