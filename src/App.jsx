@@ -8,17 +8,36 @@ import Container from "./components/Container";
 // import Counter from "./components/Counter";
 // import Dropdown from "./components/Dropdown";
 import TodoList from "./components/TodoList";
-import items from "./components/TodoList/todo.json";
 import TodoEditor from "./components/TodoEditor";
 import Filter from "./components/Filter";
 // import Form from "./components/Form";
+import Modal from "./components/Modal";
+import Clock from "./components/Clock";
 import shortid from "shortid";
 
 export default class App extends Component {
   state = {
-    todoList: items,
+    todoList: [],
     filter: "",
+    showModal: false,
   };
+
+  componentDidMount() {
+    const todos = localStorage.getItem("todoList");
+    const parsedTodos = JSON.parse(todos);
+    if (parsedTodos) {
+      this.setState({
+        todoList: parsedTodos,
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.todoList !== prevState.todoList) {
+      console.log("Update todo");
+      localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
+    }
+  }
 
   addTodo = (text) => {
     console.log(text);
@@ -73,25 +92,23 @@ export default class App extends Component {
     );
   };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
   render() {
-    const { todoList, filter } = this.state;
+    const { todoList, filter, showModal } = this.state;
     const total = todoList.length;
     const completed = this.completedCount();
     const filtered = this.getVisibleTodo();
     return (
       <Container>
-        <div>
-          <p>Total: {total}</p>
-          <p>Completed: {completed}</p>
-        </div>
-        <TodoEditor onSubmit={this.addTodo} />
-        <Filter value={filter} onChange={this.changeFilter} />
-
-        <TodoList
-          todo={filtered}
-          onDeleteTodo={this.delete}
-          onToggleCompleted={this.toggleCompleted}
-        />
+        {showModal && <Clock />}
+        <button type="button" onClick={this.toggleModal}>
+          Open clock
+        </button>
       </Container>
     );
   }
@@ -107,3 +124,27 @@ export default class App extends Component {
 <Alert text="WARNING" type="warning" />
 <Counter />
 <PaintingList items={paintings} /> */
+
+/* <button type="button" onClick={this.toggleModal}>
+          Open modal
+        </button>
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <h1>Pidoras</h1>
+            <button type="button" onClick={this.toggleModal}>
+              Close
+            </button>
+          </Modal>
+        )}
+        <div>
+          <p>Total: {total}</p>
+          <p>Completed: {completed}</p>
+        </div>
+        <TodoEditor onSubmit={this.addTodo} />
+        <Filter value={filter} onChange={this.changeFilter} />
+
+        <TodoList
+          todo={filtered}
+          onDeleteTodo={this.delete}
+          onToggleCompleted={this.toggleCompleted}
+        /> */
