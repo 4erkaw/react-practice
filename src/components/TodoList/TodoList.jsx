@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import s from "./TodoList.module.css";
+import Todo from "../Todo";
 
 const cx = classNames.bind(s);
 
@@ -14,15 +15,16 @@ export default function TodoList({ todo, onDeleteTodo, onToggleCompleted }) {
             completed: completed,
           })}
         >
-          <input
-            type="checkbox"
-            checked={completed}
-            onChange={() => onToggleCompleted(id)}
+          <Todo
+            text={text}
+            completed={completed}
+            onDelete={() => {
+              onDeleteTodo(id);
+            }}
+            onToggleCompleted={() => {
+              onToggleCompleted(id);
+            }}
           />
-          <p>{text}</p>
-          <button type="button" onClick={() => onDeleteTodo(id)}>
-            Delete
-          </button>
         </li>
       ))}
     </ul>

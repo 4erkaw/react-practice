@@ -1,10 +1,14 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import s from "./ColorPicker.module.css";
 
-export default class ColorPicker extends Component {
+export default class ColorPicker extends PureComponent {
   state = {
     activeOptIdx: 0,
   };
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.activeOptIdx !== this.state.activeOptIdx;
+  // }
 
   setActiveIdx = (index) => {
     this.setState({

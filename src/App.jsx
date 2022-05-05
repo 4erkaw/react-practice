@@ -12,7 +12,7 @@ import TodoEditor from "./components/TodoEditor";
 import Filter from "./components/Filter";
 // import Form from "./components/Form";
 import Modal from "./components/Modal";
-import Clock from "./components/Clock";
+// import Clock from "./components/Clock";
 import shortid from "shortid";
 
 export default class App extends Component {
@@ -34,13 +34,18 @@ export default class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.todoList !== prevState.todoList) {
-      console.log("Update todo");
       localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
+    }
+
+    if (
+      this.state.todoList.length !== prevState.todoList.length &&
+      prevState.todoList.length !== 0
+    ) {
+      this.toggleModal();
     }
   }
 
   addTodo = (text) => {
-    console.log(text);
     const todo = {
       id: shortid.generate(),
       text: text,
@@ -99,43 +104,46 @@ export default class App extends Component {
   };
 
   render() {
+    console.log(`Re render ${Date.now()}`);
     const { todoList, filter, showModal } = this.state;
     const total = todoList.length;
     const completed = this.completedCount();
     const filtered = this.getVisibleTodo();
     return (
       <Container>
-        {showModal && <Clock />}
+        <div>
+          <p>Total: {total}</p>
+          <p>Completed: {completed}</p>
+        </div>
         <button type="button" onClick={this.toggleModal}>
-          Open clock
+          Open modal
         </button>
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <TodoEditor onSubmit={this.addTodo} />
+            <button type="button" onClick={this.toggleModal}>
+              Close
+            </button>
+          </Modal>
+        )}
+        <Filter value={filter} onChange={this.changeFilter} />
+        <TodoList
+          todo={filtered}
+          onDeleteTodo={this.delete}
+          onToggleCompleted={this.toggleCompleted}
+        />
       </Container>
     );
   }
 }
 /* <Form onFormSubmit={this.formSubmitHandler} /> */
-/* <div>
-          <p>Total: {total}</p>
-          <p>Completed: {completed}</p>
-        </div>
-        <TodoList todo={todoList} onDeleteTodo={this.delete} /> */
 /* <ColorPicker options={colors} />
 <Dropdown />
 <Alert text="WARNING" type="warning" />
 <Counter />
 <PaintingList items={paintings} /> */
 
-/* <button type="button" onClick={this.toggleModal}>
-          Open modal
-        </button>
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <h1>Pidoras</h1>
-            <button type="button" onClick={this.toggleModal}>
-              Close
-            </button>
-          </Modal>
-        )}
+/* 
         <div>
           <p>Total: {total}</p>
           <p>Completed: {completed}</p>
