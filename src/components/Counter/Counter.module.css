@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-.controls > button {
+.btn {
   border: none;
   padding: 10px 15px;
   background-color: teal;
@@ -20,7 +20,7 @@
   transition: box-shadow 250ms linear;
 }
 
-.controls > button:active {
+.btn {
   box-shadow: 2px 5px 2px 0 rgb(0 0 0 / 0.5);
 }
 

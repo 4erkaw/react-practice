@@ -1,36 +1,65 @@
-import { Component } from "react";
-import Controls from "./Controls";
-import Value from "./Value";
+import { useState, useEffect } from "react";
 import s from "./Counter.module.css";
 
-export default class Counter extends Component {
-  static defaultProps = {
-    initialValue: 0,
+export default function Counter() {
+  const [counterA, setCounterA] = useState(0);
+  const [counterB, setCounterB] = useState(0);
+
+  const handleCounterAIncrement = () => {
+    setCounterA((state) => state + 1);
+  };
+  const handleCounterBIncrement = () => {
+    setCounterB((state) => state + 1);
   };
 
-  state = {
-    value: this.props.initialValue,
-  };
+  useEffect(() => {
+    console.log("Calling useEffect");
+    document.title = `Total clicks: ${counterA + counterB}`;
+  }, [counterA, counterB]);
 
-  increment = () => {
-    this.setState((prevState) => ({
-      value: prevState.value + 1,
-    }));
-  };
+  return (
+    <div className={s.container}>
+      <button className={s.btn} type="button" onClick={handleCounterAIncrement}>
+        Кликнули counterA {counterA} раз
+      </button>
 
-  decrement = () => {
-    this.setState((prevState) => ({
-      value: prevState.value - 1,
-    }));
-  };
-
-  render() {
-    const { value } = this.state;
-    return (
-      <div className={s.container}>
-        <Value value={value} />
-        <Controls onIncrement={this.increment} onDecrement={this.decrement} />
-      </div>
-    );
-  }
+      <button className={s.btn} type="button" onClick={handleCounterBIncrement}>
+        Кликнули counterB {counterB} раз
+      </button>
+    </div>
+  );
 }
+
+// onIncrement={this.increment} onDecrement={this.decrement}
+
+// class OldCounter extends Component {
+//   static defaultProps = {
+//     initialValue: 0,
+//   };
+
+//   state = {
+//     value: this.props.initialValue,
+//   };
+
+//   increment = () => {
+//     this.setState((prevState) => ({
+//       value: prevState.value + 1,
+//     }));
+//   };
+
+//   decrement = () => {
+//     this.setState((prevState) => ({
+//       value: prevState.value - 1,
+//     }));
+//   };
+
+//   render() {
+//     const { value } = this.state;
+//     return (
+//       <div className={s.container}>
+//         <Value value={value} />
+//         <Controls onIncrement={this.increment} onDecrement={this.decrement} />
+//       </div>
+//     );
+//   }
+// }

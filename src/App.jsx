@@ -1,8 +1,8 @@
 import { Component } from "react";
-import Container from "./components/Container";
-import PokemonInfo from "./components/Pokemon";
-import PokemonForm from "./components/Pokemon/PokemonForm";
-
+// import SignUp from "./components/SignUp";
+// import Container from "./components/Container";
+// import PokemonInfo from "./components/Pokemon";
+// import PokemonForm from "./components/Pokemon/PokemonForm";
 // import PaintingList from "./components/Painting";
 // import paintings from "./components/Painting/paintings.json";
 // import ColorPicker from "./components/ColorPicker";
@@ -15,26 +15,12 @@ import PokemonForm from "./components/Pokemon/PokemonForm";
 // import Filter from "./components/Filter";
 // import Form from "./components/Form";
 // import Modal from "./components/Modal";
-// import Clock from "./components/Clock";
+import Clock from "./components/Clock";
 // import shortid from "shortid";
 
 export default class App extends Component {
-  state = {
-    pokemonName: "",
-  };
-
-  handleFormSubmit = (pokemonName) => {
-    this.setState({ pokemonName });
-  };
-
   render() {
-    const { pokemonName } = this.state;
-    return (
-      <Container>
-        <PokemonForm onSubmit={this.handleFormSubmit}></PokemonForm>
-        <PokemonInfo pokemonName={pokemonName} />
-      </Container>
-    );
+    return <Clock />;
   }
 }
 
@@ -196,3 +182,14 @@ export default class App extends Component {
           onDeleteTodo={this.delete}
           onToggleCompleted={this.toggleCompleted}
         /> */
+
+//POKEMONU-----------
+
+// handleFormSubmit = (pokemonName) => {
+//   this.setState({ pokemonName });
+// };
+
+//<Container>
+//   <PokemonForm onSubmit={this.handleFormSubmit}></PokemonForm>
+//   <PokemonInfo pokemonName={pokemonName} />
+// </Container>

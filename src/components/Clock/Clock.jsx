@@ -1,22 +1,69 @@
-import { Component } from "react";
+import { useState, useEffect, useRef } from "react";
+import s from "./Clock.module.css";
 
-export default class Clock extends Component {
-  state = { time: new Date().toLocaleTimeString() };
+export default function Clock() {
+  const [time, setTime] = useState(() => new Date());
 
-  intervalId = null;
+  const intervalId = useRef(null);
 
-  componentDidMount() {
-    console.log("setInterval");
-    this.intervalId = setInterval(
-      () => this.setState({ time: new Date().toLocaleTimeString() }),
-      1000
-    );
-  }
+  useEffect(() => {
+    intervalId.current = setInterval(() => {
+      console.log("Это интервал каждые 3000ms " + Date.now());
+      setTime(new Date());
+    }, 3000);
+    return stop();
+  }, []);
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-  render() {
-    return <div className="aaa">{this.state.time}</div>;
-  }
+  const stop = () => {
+    clearInterval(intervalId.current);
+  };
+
+  return (
+    <div className={s.container}>
+      <button type="button" onClick={() => setTime(new Date())}>
+        New state
+      </button>
+      <p className={s.clockface}>Текущее время: {time.toLocaleTimeString()}</p>
+      <button type="button" onClick={stop}>
+        Остановить
+      </button>
+    </div>
+  );
 }
+
+// class OldClock extends Component {
+//   state = {
+//     time: new Date(),
+//   };
+
+//   intervalId = null;
+
+//   componentDidMount() {
+//     this.intervalId = setInterval(() => {
+//       console.log("Это интервал каждые 1000ms " + Date.now());
+//       this.setState({ time: new Date() });
+//     }, 1000);
+//   }
+
+//   componentWillUnmount() {
+//     console.log("Эот метод вызывается перед размонтированием компонента");
+//     this.stop();
+//   }
+
+//   stop = () => {
+//     clearInterval(this.intervalId);
+//   };
+
+//   render() {
+//     return (
+//       <div className={s.container}>
+//         <p className={s.clockface}>
+//           Текущее время: {this.state.time.toLocaleTimeString()}
+//         </p>
+//         <button type="button" onClick={this.stop}>
+//           Остановить
+//         </button>
+//       </div>
+//     );
+//   }
+// }

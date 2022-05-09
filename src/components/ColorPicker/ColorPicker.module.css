@@ -18,5 +18,6 @@
 }
 
 .active {
+  composes: option;
   transform: scale(1.2);
 }
