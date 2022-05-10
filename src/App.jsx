@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { useState } from "react";
 // import SignUp from "./components/SignUp";
-// import Container from "./components/Container";
-// import PokemonInfo from "./components/Pokemon";
-// import PokemonForm from "./components/Pokemon/PokemonForm";
+import Container from "./components/Container";
+import PokemonInfo from "./components/Pokemon";
+import PokemonForm from "./components/Pokemon/PokemonForm";
 // import PaintingList from "./components/Painting";
 // import paintings from "./components/Painting/paintings.json";
 // import ColorPicker from "./components/ColorPicker";
@@ -15,14 +15,37 @@ import { Component } from "react";
 // import Filter from "./components/Filter";
 // import Form from "./components/Form";
 // import Modal from "./components/Modal";
-import Clock from "./components/Clock";
+// import Clock from "./components/Clock";
 // import shortid from "shortid";
 
-export default class App extends Component {
-  render() {
-    return <Clock />;
-  }
+export default function App() {
+  const [pokemonName, setPokemonName] = useState("");
+
+  return (
+    <Container>
+      <PokemonForm onSubmit={setPokemonName}></PokemonForm>
+      <PokemonInfo pokemonName={pokemonName} />
+    </Container>
+  );
 }
+
+// export default class App extends Component {
+//   state = {
+//     pokemonName: "",
+//   };
+//   handleFormSubmit = (pokemonName) => {
+//     this.setState({ pokemonName });
+//   };
+
+//   render() {
+//     return (
+//       <Container>
+//         <PokemonForm onSubmit={this.handleFormSubmit}></PokemonForm>
+//         <PokemonInfo pokemonName={this.state.pokemonName} />
+//       </Container>
+//     );
+//   }
+// }
 
 /* <ToastContainer autoClose={3000} /> */
 // state = {
@@ -188,8 +211,3 @@ export default class App extends Component {
 // handleFormSubmit = (pokemonName) => {
 //   this.setState({ pokemonName });
 // };
-
-//<Container>
-//   <PokemonForm onSubmit={this.handleFormSubmit}></PokemonForm>
-//   <PokemonInfo pokemonName={pokemonName} />
-// </Container>
