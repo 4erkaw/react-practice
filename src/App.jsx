@@ -1,8 +1,8 @@
-import { useState } from "react";
+// import { useState } from "react";
 // import SignUp from "./components/SignUp";
 import Container from "./components/Container";
-import PokemonInfo from "./components/Pokemon";
-import PokemonForm from "./components/Pokemon/PokemonForm";
+// import PokemonInfo from "./components/Pokemon";
+// import PokemonForm from "./components/Pokemon/PokemonForm";
 // import PaintingList from "./components/Painting";
 // import paintings from "./components/Painting/paintings.json";
 // import ColorPicker from "./components/ColorPicker";
@@ -16,15 +16,13 @@ import PokemonForm from "./components/Pokemon/PokemonForm";
 // import Form from "./components/Form";
 // import Modal from "./components/Modal";
 // import Clock from "./components/Clock";
+import Friends from "./components/Friends";
 // import shortid from "shortid";
 
 export default function App() {
-  const [pokemonName, setPokemonName] = useState("");
-
   return (
     <Container>
-      <PokemonForm onSubmit={setPokemonName}></PokemonForm>
-      <PokemonInfo pokemonName={pokemonName} />
+      <Friends />
     </Container>
   );
 }
