@@ -13,16 +13,22 @@ import Container from "./components/Container";
 // import TodoList from "./components/TodoList";
 // import TodoEditor from "./components/TodoEditor";
 // import Filter from "./components/Filter";
-import Form from "./components/Form";
+// import Form from "./components/Form";
 // import Modal from "./components/Modal";
 // import Clock from "./components/Clock";
 // import Friends from "./components/Friends";
+import AppBar from "./components/BROWSERROUTER/AppBar";
+import HomeView from "./components/BROWSERROUTER/views/HomeView";
+import { Route, Routes } from "react-router-dom";
 // import shortid from "shortid";
 
 export default function App() {
   return (
     <Container>
-      <Form />
+      <AppBar />
+      <Routes>
+        <Route path="/" exact element={<HomeView />} />
+      </Routes>
     </Container>
   );
 }
