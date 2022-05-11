@@ -13,16 +13,16 @@ import Container from "./components/Container";
 // import TodoList from "./components/TodoList";
 // import TodoEditor from "./components/TodoEditor";
 // import Filter from "./components/Filter";
-// import Form from "./components/Form";
+import Form from "./components/Form";
 // import Modal from "./components/Modal";
 // import Clock from "./components/Clock";
-import Friends from "./components/Friends";
+// import Friends from "./components/Friends";
 // import shortid from "shortid";
 
 export default function App() {
   return (
     <Container>
-      <Friends />
+      <Form />
     </Container>
   );
 }
