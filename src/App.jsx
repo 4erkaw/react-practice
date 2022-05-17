@@ -17,18 +17,14 @@ import Container from "./components/Container";
 // import Modal from "./components/Modal";
 // import Clock from "./components/Clock";
 // import Friends from "./components/Friends";
-import AppBar from "./components/BROWSERROUTER/AppBar";
-import HomeView from "./components/BROWSERROUTER/views/HomeView";
-import { Route, Routes } from "react-router-dom";
+// import AppBar from "./components/BROWSERROUTER/AppBar";
+// import HomeView from "./components/BROWSERROUTER/views/HomeView";
+// import { Route, Routes } from "react-router-dom";
 // import shortid from "shortid";
 
 export default function App() {
   return (
     <Container>
-      <AppBar />
-      <Routes>
-        <Route path="/" exact element={<HomeView />} />
-      </Routes>
     </Container>
   );
 }
